@@ -26,8 +26,6 @@ Animate lines of text as they scroll into view using **GSAP** and **SplitType**.
 Add data-text-line to any element you want to animate:
 
 ```html
-Copy
-Edit
 <h2 data-text-line>
   This text will animate line by line as it scrolls into view.
 </h2>
