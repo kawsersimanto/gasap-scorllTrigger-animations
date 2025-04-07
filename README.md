@@ -57,3 +57,13 @@ document.querySelectorAll("[data-text-line]").forEach((element) => {
   });
 });
 ```
+# 🪄 Styling Tip
+
+Add this basic CSS to improve line separation:
+
+```css
+.line-wrap {
+  overflow: hidden;
+  display: block;
+}
+```
