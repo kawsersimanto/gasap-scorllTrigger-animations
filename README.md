@@ -10,8 +10,8 @@ This project contains a JavaScript-based animation utility using [GSAP](https://
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
 ```
-🧠 Features
-1. Text Line Animation
+# 🧠 Features
+## 1. Text Line Animation
 Adds line-by-line animation to elements with data-text-line:
 
 html
@@ -24,7 +24,7 @@ Uses SplitType for splitting the text into lines.
 
 Triggered by scroll using ScrollTrigger.
 
-2. Fade-In from Left
+## 2. Fade-In from Left
 Fade-in from left for elements with data-fade="left" and child elements marked with data-fade-child.
 
 html
@@ -37,7 +37,7 @@ data-fade-value: X offset (default: 100)
 
 data-fade-trigger: Optional selector for ScrollTrigger trigger element
 
-3. Scale from Left
+## 3. Scale from Left
 html
 Copy
 Edit
@@ -50,7 +50,7 @@ data-scale-child required inside.
 
 Staggered animation using ScrollTrigger.
 
-4. Scale Up
+## 4. Scale Up
 html
 Copy
 Edit
@@ -61,7 +61,7 @@ No opacity or stagger by default.
 
 Triggered via data-scale-trigger if needed.
 
-5. Horizontal Movement
+## 5. Horizontal Movement
 Move To X:
 
 html
@@ -92,7 +92,7 @@ Supports data-move-trigger for custom trigger element.
 
 scrub: 1 ensures smooth, scroll-linked animation.
 
-6. Slide Up Animation
+## 6. Slide Up Animation
 html
 Copy
 Edit
@@ -101,14 +101,14 @@ Slides an element upward on scroll.
 
 data-slide-trigger for custom triggering.
 
-🛠 How to Use
+# 🛠 How to Use
 Add the CDN scripts listed above in your HTML.
 
 Add the corresponding data-* attributes to your HTML elements.
 
 No manual initialization is required — all scripts auto-detect elements with the correct attributes.
 
-📦 Customization
+# 📦 Customization
 Each data attribute supports optional configuration:
 
 Attribute	Description	Default
@@ -119,7 +119,8 @@ data-scale-duration	Duration of scale animation (in seconds)	0.5
 data-move-to / from	Target position in X (%)	- / + value
 data-move-to-y / from-y	Target position in Y (%)	- / + value
 data-slide-value	Vertical slide offset	-10
-📋 Example
+
+# 📋 Example
 html
 Copy
 Edit
@@ -130,22 +131,20 @@ Edit
 <h2 data-text-line>This is a Heading</h2>
 
 <div data-scale="up" data-scale-value="0.7" data-scale-duration="0.6"></div>
-📁 File Structure
+
+# 📁 File Structure
 This README assumes the animation logic is embedded in your main HTML or bundled in a script file like animations.js.
 
-✅ Dependencies
-GSAP v3.12.7
+# ✅ Dependencies
+- GSAP v3.12.7
+- GSAP ScrollTrigger
+- SplitType
+- Lenis Smooth Scroll (Optional)
 
-GSAP ScrollTrigger
-
-SplitType
-
-Lenis Smooth Scroll (Optional)
-
-🧾 License
+#🧾 License
 This project uses open-source libraries and can be freely modified or integrated.
 
-🙌 Credits
+# 🙌 Credits
 GSAP
 
 Studio Freight (Lenis)
