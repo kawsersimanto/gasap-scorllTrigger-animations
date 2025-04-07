@@ -69,3 +69,42 @@ Add this basic CSS to improve line separation:
 ```
 # 👈 Fade-in Animation (Right to Left) with GSAP & ScrollTrigger
 Create smooth fade-in animations from right to left for elements as they scroll into view using **GSAP** and `ScrollTrigger`.
+
+🧩 HTML Structure
+Use the following structure:
+
+```html
+<section data-fade="left" data-fade-value="150" data-fade-trigger="#custom-trigger">
+  <div data-fade-child>Child element 1</div>
+  <div data-fade-child>Child element 2</div>
+  <div data-fade-child>Child element 3</div>
+</section>
+
+<!-- Or simply use: -->
+<section data-fade="left">
+  <div data-fade-child>Fade me in</div>
+</section>
+```
+
+# 💻 JavaScript Code
+```js
+
+// Fade-in animation from right to left for elements with data-fade="left"
+document.querySelectorAll('[data-fade="left"]').forEach((element) => {
+  const fadeValue = element.getAttribute("data-fade-value") || 100; // Default to 100 if not set
+  const triggerSelector = element.getAttribute("data-fade-trigger") || element;
+
+  gsap.from(element.querySelectorAll("[data-fade-child]"), {
+    x: parseInt(fadeValue), // Convert to number
+    opacity: 0,
+    ease: "power3.out",
+    duration: 1,
+    stagger: 0.3,
+    scrollTrigger: {
+      trigger: triggerSelector,
+      start: "top 80%",
+      toggleActions: "play none none reverse"
+    }
+  });
+});
+```
