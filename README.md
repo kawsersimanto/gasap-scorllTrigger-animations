@@ -26,3 +26,41 @@ Animate lines of text as they scroll into view using **GSAP** and **SplitType**.
 <!-- SplitType -->
 <script src="https://unpkg.com/split-type"></script>
 ```
+# 🧩 HTML Structure
+Add data-text-line to any element you want to animate:
+
+```html
+Copy
+Edit
+<h2 data-text-line>
+  This text will animate line by line as it scrolls into view.
+</h2>
+```
+
+#💻 JavaScript Code
+```js
+Copy
+Edit
+// text line animation
+document.querySelectorAll("[data-text-line]").forEach((element) => {
+  const textLines = new SplitType(element, { types: "lines" });
+
+  textLines.lines.forEach((line) => {
+    const wrapper = document.createElement("div");
+    wrapper.classList.add("line-wrap");
+    line.parentNode.insertBefore(wrapper, line);
+    wrapper.appendChild(line);
+  });
+
+  gsap.from(textLines.lines, {
+    scrollTrigger: {
+      trigger: element,
+      toggleActions: "play none none reverse",
+    },
+    yPercent: 100,
+    ease: "power4",
+    duration: 0.7,
+    stagger: 0.1,
+  });
+});
+```
