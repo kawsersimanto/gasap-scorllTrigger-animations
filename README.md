@@ -67,3 +67,5 @@ Add this basic CSS to improve line separation:
   display: block;
 }
 ```
+# 👈 Fade-in Animation (Right to Left) with GSAP & ScrollTrigger
+Create smooth fade-in animations from right to left for elements as they scroll into view using **GSAP** and `ScrollTrigger`.
