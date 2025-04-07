@@ -12,8 +12,6 @@ This script adds scroll-triggered animations to your HTML elements using GSAP an
 
 Animate lines of text as they scroll into view using **GSAP** and **SplitType**. This animation splits text into lines and animates them upward with a smooth staggered motion.
 
----
-
 ## 📦 Installation
 
 ### Using CDN (Recommended for Quick Setup)
