@@ -33,8 +33,7 @@ Add data-text-line to any element you want to animate:
 
 # 💻 JavaScript Code
 ```js
-Copy
-Edit
+
 // text line animation
 document.querySelectorAll("[data-text-line]").forEach((element) => {
   const textLines = new SplitType(element, { types: "lines" });
