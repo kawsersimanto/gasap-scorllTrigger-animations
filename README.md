@@ -108,3 +108,9 @@ document.querySelectorAll('[data-fade="left"]').forEach((element) => {
   });
 });
 ```
+# 🎨 Optional Styling (Recommended)
+```css
+[data-fade-child] {
+  will-change: transform, opacity;
+}
+```
