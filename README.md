@@ -37,7 +37,7 @@ Edit
 </h2>
 ```
 
-#💻 JavaScript Code
+# 💻 JavaScript Code
 ```js
 Copy
 Edit
