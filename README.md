@@ -10,143 +10,229 @@ This project contains a JavaScript-based animation utility using [GSAP](https://
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
 ```
-# 🧠 Features
-## 1. Text Line Animation
-Adds line-by-line animation to elements with data-text-line:
+## JS Code
 
-html
-Copy
-Edit
-<div data-text-line>Animated Heading</div>
-Animates each line upward with a power4 easing.
+```js
 
-Uses SplitType for splitting the text into lines.
+document.addEventListener("DOMContentLoaded", () => {
+  gsap.registerPlugin(ScrollTrigger);
 
-Triggered by scroll using ScrollTrigger.
+  let lenis;
 
-## 2. Fade-In from Left
-Fade-in from left for elements with data-fade="left" and child elements marked with data-fade-child.
+  lenis = new Lenis({
+    lerp: 0.1,
+    wheelMultiplier: 1.3,
+    gestureOrientation: "vertical",
+    normalizeWheel: false,
+    smoothTouch: false,
+  });
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
 
-html
-Copy
-Edit
-<div data-fade="left" data-fade-value="150">
-  <div data-fade-child>Fade Me In</div>
-</div>
-data-fade-value: X offset (default: 100)
+  lenis.on("scroll", ScrollTrigger.update);
 
-data-fade-trigger: Optional selector for ScrollTrigger trigger element
+  // navbar
+  const navbar = document.querySelector(".main-header");
 
-## 3. Scale from Left
-html
-Copy
-Edit
-<div data-scale="left" data-scale-value="0.8" data-scale-duration="0.6">
-  <div data-scale-child>Scale Me</div>
-</div>
-Animates from a smaller scale to normal.
+  document.addEventListener("scroll", () => {
+    if (scrollY > 200) {
+      navbar.classList.add("active");
+    } else {
+      navbar.classList.remove("active");
+    }
+  });
 
-data-scale-child required inside.
+  // text line animation
 
-Staggered animation using ScrollTrigger.
+  document.querySelectorAll("[data-text-line]").forEach((element) => {
+    const textLines = new SplitType(element, { types: "lines" });
+    const triggerSelector =
+      element.getAttribute("data-fade-trigger") || element;
+    const duration = element.getAttribute("data-text-duration") || 0.7;
+    const stagger = element.getAttribute("data-text-stagger") || 0.7;
 
-## 4. Scale Up
-html
-Copy
-Edit
-<div data-scale="up" data-scale-value="0.8" data-scale-duration="0.5"></div>
-Simple scale-up animation on scroll.
+    // adding wrapper to the line
+    textLines.lines.forEach((line) => {
+      const wrapper = document.createElement("div");
+      wrapper.classList.add("line-wrap");
+      line.parentNode.insertBefore(wrapper, line);
+      wrapper.appendChild(line);
+    });
 
-No opacity or stagger by default.
+    gsap.from(textLines.lines, {
+      scrollTrigger: {
+        trigger: triggerSelector,
+        toggleActions: "play none none reverse",
+      },
+      yPercent: 100,
+      ease: "power4",
+      duration: duration,
+      stagger: stagger,
+    });
+  });
 
-Triggered via data-scale-trigger if needed.
+  // Fade-in animation from right to left for elements with moving
+  document.querySelectorAll('[data-fade="left"]').forEach((element) => {
+    const fadeValue = element.getAttribute("data-fade-value") || 100;
+    const triggerSelector =
+      element.getAttribute("data-fade-trigger") || element;
+    const duration = element.getAttribute("data-fade-duration") || 1;
+    const stagger = element.getAttribute("data-fade-stagger") || 0.3;
+    const scrub = element.getAttribute("data-fade-scrub") || false;
 
-## 5. Horizontal Movement
-Move To X:
+    gsap.from(element.querySelectorAll("[data-fade-child]"), {
+      x: parseInt(fadeValue),
+      opacity: 0,
+      ease: "power3.out",
+      duration: duration,
+      stagger: stagger,
+      scrollTrigger: {
+        trigger: triggerSelector,
+        start: "top 80%",
+        toggleActions: "play none none reverse",
+        scrub: scrub,
+      },
+    });
+  });
 
-html
-Copy
-Edit
-<div data-move-to="100"></div>
-Move From X:
+  // element scale left animation
+  document.querySelectorAll('[data-scale="left"]').forEach((element) => {
+    const scaleValue = element.getAttribute("data-scale-value") || 0.8; // Default to 100 if not set
+    const triggerSelector =
+      element.getAttribute("data-scale-trigger") || element;
+    const scaleDuration = element.getAttribute("data-scale-duration") || 0.5;
 
-html
-Copy
-Edit
-<div data-move-from="-100"></div>
-Move To Y:
+    gsap.from(element.querySelectorAll("[data-scale-child]"), {
+      scale: scaleValue,
+      opacity: 0,
+      ease: "power3.out",
+      duration: scaleDuration,
+      stagger: 0.1,
+      scrollTrigger: {
+        trigger: triggerSelector,
+        start: "top 80%",
+        toggleActions: "play none none reverse",
+      },
+    });
+  });
 
-html
-Copy
-Edit
-<div data-move-to-y="50"></div>
-Move From Y:
+  // element scale up animation without opacity
 
-html
-Copy
-Edit
-<div data-move-from-y="-50"></div>
-Smooth xPercent or yPercent movement with scroll.
+  document.querySelectorAll('[data-scale="up"]').forEach((element) => {
+    const scaleValue = element.getAttribute("data-scale-value") || 0.8; // Default to 100 if not set
+    const triggerSelector =
+      element.getAttribute("data-scale-trigger") || element;
+    const scaleDuration = element.getAttribute("data-scale-duration") || 0.5;
 
-Supports data-move-trigger for custom trigger element.
+    gsap.from(element, {
+      scale: scaleValue,
+      ease: "power3.out",
+      duration: scaleDuration,
+      scrollTrigger: {
+        trigger: triggerSelector,
+        start: "top 80%",
+        toggleActions: "play none none reverse",
+        scrub: 1,
+      },
+    });
+  });
 
-scrub: 1 ensures smooth, scroll-linked animation.
+  // element move animation
 
-## 6. Slide Up Animation
-html
-Copy
-Edit
-<div data-slide="up" data-slide-value="-10"></div>
-Slides an element upward on scroll.
+  document.querySelectorAll("[data-move-to]").forEach((trigger) => {
+    const target = trigger.dataset.moveTrigger || trigger;
+    const moveTo = trigger.dataset.moveTo;
 
-data-slide-trigger for custom triggering.
+    if (target) {
+      gsap.to(trigger, {
+        scrollTrigger: {
+          trigger: target,
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+          scrub: 1,
+        },
+        xPercent: `${moveTo}`,
+        ease: "power1.out",
+        duration: 0.3,
+      });
+    }
+  });
 
-# 🛠 How to Use
-Add the CDN scripts listed above in your HTML.
+  document.querySelectorAll("[data-move-from]").forEach((trigger) => {
+    const target = trigger.dataset.moveTrigger || trigger;
+    const moveFrom = trigger.dataset.moveFrom;
 
-Add the corresponding data-* attributes to your HTML elements.
+    if (target) {
+      gsap.from(trigger, {
+        scrollTrigger: {
+          trigger: target,
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+          scrub: 1,
+        },
+        xPercent: moveFrom,
+        ease: "power1.out",
+      });
+    }
+  });
 
-No manual initialization is required — all scripts auto-detect elements with the correct attributes.
+  document.querySelectorAll("[data-move-to-y]").forEach((trigger) => {
+    const target = trigger.dataset.moveTrigger || trigger;
+    const moveToY = trigger.dataset.moveToY;
 
-# 📦 Customization
-Each data attribute supports optional configuration:
+    if (target) {
+      gsap.to(trigger, {
+        scrollTrigger: {
+          trigger: target,
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+          scrub: 1,
+        },
+        yPercent: moveToY,
+        ease: "power1.out",
+      });
+    }
+  });
 
-Attribute	Description	Default
-data-fade-value	Offset in X direction	100
-data-fade-trigger	Custom scroll trigger selector	self
-data-scale-value	Initial scale value	0.8
-data-scale-duration	Duration of scale animation (in seconds)	0.5
-data-move-to / from	Target position in X (%)	- / + value
-data-move-to-y / from-y	Target position in Y (%)	- / + value
-data-slide-value	Vertical slide offset	-10
+  document.querySelectorAll("[data-move-from-y]").forEach((trigger) => {
+    const target = trigger.dataset.moveTrigger || trigger;
+    const moveFromY = trigger.dataset.moveFromY;
 
-# 📋 Example
-html
-Copy
-Edit
-<section data-fade="left" data-fade-value="150">
-  <div data-fade-child>Scroll me in from left</div>
-</section>
+    if (target) {
+      gsap.from(trigger, {
+        scrollTrigger: {
+          trigger: target,
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+          scrub: 1,
+        },
+        yPercent: moveFromY,
+        ease: "power1.out",
+      });
+    }
+  });
 
-<h2 data-text-line>This is a Heading</h2>
+  document.querySelectorAll("[data-slide='up']").forEach((trigger) => {
+    const target = trigger.dataset.slideTrigger || trigger;
+    const slideValue = trigger.dataset.slideValue || -10;
 
-<div data-scale="up" data-scale-value="0.7" data-scale-duration="0.6"></div>
+    if (target) {
+      gsap.from(trigger, {
+        scrollTrigger: {
+          trigger: target,
+          start: "top 80%",
+          scrub: 1,
+          toggleActions: "play none none reverse",
+        },
+        yPercent: slideValue,
+        ease: "power1.out",
+      });
+    }
+  });
+});
 
-# 📁 File Structure
-This README assumes the animation logic is embedded in your main HTML or bundled in a script file like animations.js.
 
-# ✅ Dependencies
-- GSAP v3.12.7
-- GSAP ScrollTrigger
-- SplitType
-- Lenis Smooth Scroll (Optional)
-
-#🧾 License
-This project uses open-source libraries and can be freely modified or integrated.
-
-# 🙌 Credits
-GSAP
-
-Studio Freight (Lenis)
-
-Luke Peavey (SplitType)
+```
