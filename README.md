@@ -281,17 +281,98 @@ To fade elements from the left:
 - `data-fade-stagger`: Time between items (default: 0.3)
 - `data-fade-scrub`: Set to true for smooth scroll-linked animations (optional)
 
+## Scale Animations
+Scale from Left
+
+```html
+<div data-scale="left" data-scale-value="0.8" data-scale-duration="0.5">
+  <div data-scale-child>Content</div>
+</div>
+```
+
+- `data-scale-value`: Scaling amount (optional default value: 0.8)
+- `data-scale-duration`: Animation duration (default: 0.5)
+- `data-scale-child`: Targeted Child Element
+
+Scale Up (Single Element)
+
+```html
+<div data-scale="up" data-scale-value="0.8" data-scale-duration="0.5">
+  Single Element
+</div>
+```
+
+- `data-scale-value`: Scaling amount (optional default value: 0.8)
+- `data-scale-duration`: Animation duration (default: 0.5)
+
+## Move Animations
+Move To (X Axis)
+
+```html
+<div data-move-to="50">Move Me Right</div>
+```
+- `data-move-to`: Move to X% relative to its own width.
+
+Move From (X Axis)
+
+```html
+<div data-move-from="-50">Move Me from Left</div>
+```
+
+- `data-move-from`: Start from X% relative to its own width.
+
+Move To (Y Axis)
+
+```html
+<div data-move-to-y="50">Move Me Down</div>
+```
+
+- `data-move-to-y`: Move to Y% relative to its own height.
+
+Move From (Y Axis)
+
+```html
+<div data-move-from-y="-50">Move Me from Top</div>
+```
+
+- `data-move-from-y`: Start from Y% relative to its own height.
+
+## Slide Up Animation
+
+```html
+<div data-slide="up" data-slide-value="-10">
+  Slide Me Up
+</div>
+```
+
+- `data-slide-value`: How much to move on Y axis (default: -10)
 
 
 
+# Attributes Summary
 
+| Attribute               | Purpose                              | Default |
+|--------------------------|--------------------------------------|---------|
+| `data-text-line`         | Animate text lines                   | —       |
+| `data-text-duration`     | Duration of line animation           | 0.7     |
+| `data-text-stagger`      | Delay between lines                  | 0.7     |
+| `data-fade`              | Fade from left                       | —       |
+| `data-fade-value`        | Distance to fade from                | 100     |
+| `data-fade-duration`     | Duration of fade animation           | 1       |
+| `data-fade-stagger`      | Delay between fade children          | 0.3     |
+| `data-fade-scrub`        | Scroll scrub (true/false)            | false   |
+| `data-scale`             | Scale animation direction (left/up)  | —       |
+| `data-scale-value`       | Scale starting value                 | 0.8     |
+| `data-scale-duration`    | Scale animation duration             | 0.5     |
+| `data-move-to`           | Move X-axis to %                     | —       |
+| `data-move-from`         | Move X-axis from %                   | —       |
+| `data-move-to-y`         | Move Y-axis to %                     | —       |
+| `data-move-from-y`       | Move Y-axis from %                   | —       |
+| `data-slide`             | Slide direction (currently `up`)     | —       |
+| `data-slide-value`       | Slide Y movement %                   | -10     |
 
+## Notes
 
-
-
-
-
-
-
-
-
+- All scroll animations are triggered using GSAP ScrollTrigger.
+- Smooth scrolling is handled automatically using Lenis.
+- This setup provides a lightweight and highly customizable scroll animation experience without heavy page builders.
