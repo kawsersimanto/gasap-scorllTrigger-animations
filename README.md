@@ -2,6 +2,15 @@
 
 This project contains a JavaScript-based animation utility using [GSAP](https://gsap.com/), [ScrollTrigger](https://gsap.com/docs/v3/Plugins/ScrollTrigger/), [SplitType](https://github.com/lukePeavey/SplitType), and [Lenis](https://github.com/studio-freight/lenis). It enables beautiful scroll-based animations, including text line reveals, fade-ins, scale effects, and element translations in both the X and Y axes.
 
+## Features
+- Smooth scrolling with Lenis
+- Navbar activation on scroll
+- Text line animations with SplitType and GSAP
+- Fade-in animations (from left)
+- Scale animations (scale up or from left)
+- Move animations (horizontal and vertical)
+- Slide-up animations
+
 ## 🔗 CDN Scripts Used
 
 ```html
@@ -234,5 +243,55 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-
 ```
+
+## Navbar Activation on Scroll
+
+The script automatically toggles an .active class on the element with .main-header class after scrolling 200px.
+
+```html
+<header class="main-header">
+  <!-- Navbar content -->
+</header>
+```
+
+## Text Line Animation
+To animate text lines:
+
+```html
+<h2 data-text-line data-text-duration="0.7" data-text-stagger="0.5">
+  Your Animated Text
+</h2>
+```
+
+- `data-text-duration`: Animation duration per line (default: 0.7)
+- `data-text-stagger`: Time between each line animation (default: 0.7)
+
+## Fade Animation (Left)
+To fade elements from the left:
+
+```html
+<div data-fade="left" data-fade-value="100" data-fade-duration="1" data-fade-stagger="0.3">
+  <div data-fade-child>Item 1</div>
+  <div data-fade-child>Item 2</div>
+</div>
+```
+- `data-fade-value`: Distance to move horizontally (default: 100)
+- `data-fade-duration`: Animation duration (default: 1)
+- `data-fade-stagger`: Time between items (default: 0.3)
+- `data-fade-scrub`: Set to true for smooth scroll-linked animations (optional)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
