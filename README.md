@@ -137,13 +137,19 @@ document.addEventListener("DOMContentLoaded", () => {
     }),
     "text-line": (el) => {
       const textLines = new SplitType(el, { types: "lines" });
+
       textLines.lines.forEach((line) => {
         const wrapper = document.createElement("div");
         wrapper.classList.add("line-wrap");
         line.parentNode.insertBefore(wrapper, line);
         wrapper.appendChild(line);
       });
-      return { yPercent: 100 };
+
+      return {
+        yPercent: 100,
+        opacity: 0,
+        targets: el.querySelectorAll(".line-wrap"), // Important: animate the .line-wraps
+      };
     },
   };
 
@@ -166,33 +172,32 @@ document.addEventListener("DOMContentLoaded", () => {
     const blur = element.getAttribute("data-blur") || 0;
     const childSelector = element.getAttribute("data-child");
 
-    const animationProps = {
+    const presetData = preset(element);
+    const targets = presetData.targets || (childSelector ? element.querySelectorAll(childSelector) : element);
+
+    const { targets: _, ...animationProps } = {
       ease,
       duration,
       stagger,
       delay,
       blur: `${blur}px`,
-      ...preset(element),
+      ...presetData,
     };
 
-    gsap.from(
-      childSelector ? element.querySelectorAll(childSelector) : element,
-      {
-        ...animationProps,
-        scrollTrigger: {
-          trigger,
-          start,
-          toggleActions,
-          scrub,
-        },
-      }
-    );
+    gsap.from(targets, {
+      ...animationProps,
+      scrollTrigger: {
+        trigger,
+        start,
+        toggleActions,
+        scrub,
+      },
+    });
   }
 
   // Animate all elements with [data-animate]
   document.querySelectorAll("[data-animate]").forEach(animateElement);
 });
-
 
 ```
 
