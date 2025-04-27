@@ -24,6 +24,15 @@ This project contains a JavaScript-based animation utility using [GSAP](https://
 ## CSS Code
 
 ```css
+.main-header.active {
+  position: fixed;
+  top: 0;
+  left: 20px;
+  right: 20px;
+  box-shadow: 0 10px 20px #0399c91c;
+  animation: slideDown 300ms ease-out forwards;
+}
+
 html.lenis,
 html.lenis body {
   height: auto;
