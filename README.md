@@ -44,6 +44,30 @@ html.lenis body {
 [data-text-line] .line-wrap {
   overflow: hidden;
 }
+
+/* nvabar */
+.nav-link {
+  position: relative;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+    cursor: pointer;
+}
+
+@media (min-width: 1025px) {
+  .nav-link::after {
+    content: "";
+    display: block;
+    height: 1px;
+    width: 0%;
+    background: #red;
+    position: absolute;
+    bottom: 0;
+    transition: width 500ms ease-in-out;
+  }
+}
+
 ```
 
 ## JS Code
