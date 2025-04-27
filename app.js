@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Navbar active class on scroll
   const navbar = document.querySelector(".main-header");
   document.addEventListener("scroll", () => {
-    navbar.classList.toggle("active", scrollY > 200);
+    navbar?.classList.toggle("active", scrollY > 200);
   });
 
   // Animation presets
