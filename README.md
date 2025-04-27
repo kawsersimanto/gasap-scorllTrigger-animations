@@ -18,6 +18,7 @@ This project contains a JavaScript-based animation utility using [GSAP](https://
 <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.37/dist/lenis.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/kawsersimanto/gasap-scorllTrigger-animations@main/app.js"></script>
 ```
 ## JS Code
 
