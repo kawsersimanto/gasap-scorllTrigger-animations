@@ -20,6 +20,32 @@ This project contains a JavaScript-based animation utility using [GSAP](https://
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/kawsersimanto/gasap-scorllTrigger-animations@main/app.js"></script>
 ```
+
+## CSS Code
+
+```css
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+[data-text-line] {
+  font-kerning: none;
+}
+
+[data-text-line] .line-wrap {
+  overflow: hidden;
+}
+```
+
 ## JS Code
 
 ```js
