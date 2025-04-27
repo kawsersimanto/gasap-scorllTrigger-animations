@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return {
         yPercent: 100,
         opacity: 0,
-        targets: el.querySelectorAll(".line-wrap"), // Important: animate the .line-wraps
+        targets: el.querySelectorAll(".line-wrap .line"), // <<=== This is the change
       };
     },
   };
@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
       element.getAttribute("data-toggle-actions") || "play none none reverse";
     const ease = element.getAttribute("data-ease") || "power3.out";
     const duration = parseFloat(element.getAttribute("data-duration") || 1);
-    const stagger = parseFloat(element.getAttribute("data-stagger") || 0.3);
+    const stagger = parseFloat(element.getAttribute("data-stagger") || 0.1); // <-- slightly faster
     const delay = parseFloat(element.getAttribute("data-delay") || 0);
     const blur = element.getAttribute("data-blur") || 0;
     const childSelector = element.getAttribute("data-child");
